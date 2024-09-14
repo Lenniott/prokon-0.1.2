@@ -1,28 +1,35 @@
 {
   "manifest_version": 3,
-  "name": "<name in manifest.json>",
-  "description": "<description in manifest.json>",
-  "options_ui": {
-    "page": "src/pages/options/index.html"
-  },
+  "name": "prokon - Web Article Assistant",
+  "description": "Enhance web article comprehension with local search and highlighting",
   "background": {
     "service_worker": "src/pages/background/index.ts",
     "type": "module"
   },
   "action": {
-    "default_popup": "src/pages/popup/index.html",
+    "default_title": "prokon - Web Article Assistant",
     "default_icon": {
       "32": "icon-32.png"
     }
   },
-  "chrome_url_overrides": {
-    "newtab": "src/pages/newtab/index.html"
+  "side_panel": {
+    "default_path": "src/pages/panel/index.html"
   },
   "icons": {
+    "16": "icon-128.png",
+    "32": "icon-32.png",
+    "48": "icon-48.png",
     "128": "icon-128.png"
   },
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "sidePanel",
+    "scripting",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "http://localhost/*"
   ],
   "content_scripts": [
     {
@@ -39,15 +46,16 @@
       ]
     }
   ],
-  "devtools_page": "src/pages/devtools/index.html",
   "web_accessible_resources": [
     {
       "resources": [
-        "contentStyle.css",
-        "icon-128.png",
-        "icon-32.png"
+        "icon-128.png"
       ],
-      "matches": []
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "<all_urls>"
+      ]
     }
   ]
 }

@@ -1,0 +1,16 @@
+page data is now being sent to the background script from the content script on button click in the panel.
+
+we now need to vectorise the data and store it in chrome storage indexed by url. the data being stored is in the following format:
+{type,content,selector}
+
+the type is the html tag, the content is the text content of the tag, and the selector is the css selector that can be used to select the tag.
+
+the data is also being sent to the background script with the url of the page.
+
+next thing to do is embed the data into a vector and store the vector in the chrome storage. in the metadata for the vector we will store the url and the selector.
+
+we need to ensure we can install langchain and that it workds with chrome extension.
+
+we will being using a local embedding model and LLM using ollama in particular nomic-embed-text and tinyllama
+
+first step is to install langchain and ollama in the extension.

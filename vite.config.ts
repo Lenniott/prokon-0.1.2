@@ -64,4 +64,20 @@ export default defineConfig({
     sourcemap: isDev,
     emptyOutDir: !isDev
   },
+  // Add this proxy configuration under the server section
+  server: {
+    proxy: {
+      // Proxy API requests to your Express server
+      '/api': {
+        target: 'http://localhost:3000', // Your Express server
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '/api'), // Optional if needed for the correct path
+      },
+    },
+    hmr: {
+      host: 'localhost',
+      port: 5173, // Ensure the WebSocket HMR port is set for Vite
+      clientPort: 5173,
+    },
+  },
 });
